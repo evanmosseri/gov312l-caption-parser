@@ -51,7 +51,8 @@ def get_module(number,):
 		req = requests.get(url)
 		found = "<title>404 Not Found</title>" not in str(req.content)
 		if(found):
-			return re.sub(r'\?(?!")',".\n",re.sub(r'(?:[a-zA-z]{2,})\.(?!")',".\n",process_module(req.text)))
+			# return re.sub(r'\?(?!")',".\n",re.sub(r'(?:[a-zA-z]{2,})\.(?!")',".\n",process_module(req.text)))
+			return process_module(req.text)
 
 def get_or_create(path):
 	print("/".join(path.split("/")[:-1]))
