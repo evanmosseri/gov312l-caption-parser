@@ -51,13 +51,13 @@ def get_module(number,):
 		req = requests.get(url)
 		found = "<title>404 Not Found</title>" not in str(req.content)
 		if(found):
-			return process_module(req.text)
+			return re.sub(r'\?(?!")',".\n",re.sub(r'(?:[a-zA-z]{2,})\.(?!")',".\n",process_module(req.text)))
 
 def get_or_create(path):
 	print("/".join(path.split("/")[:-1]))
 	if(not os.path.exists("/".join(path.split("/")[:-1]))):
 		os.makedirs("/".join(path.split("/")[:-1]))
-	return open(path,"w")
+	return open(path,"w+")
 def load_module(module,submodule):
 	# print(module,submodule)
 	mod = "{}.{}".format(module,submodule)
